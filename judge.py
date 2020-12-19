@@ -2,16 +2,22 @@ import os, sys, subprocess
 
 file = sys.argv[1] if len(sys.argv) > 1 else input('Filename?')
 extension = file.split('.')[-1].lower() if '.' in file else ''
-language = extension if extension in ['py', 'java', 'class'] else input('Language?').lower()
+language = extension if extension in ['py', 'java', 'class', 'cpp', 'exe'] else input('Language?').lower()
 problem = input('Problem?')
 
 def get_args():
+    global file
     if language in ['python', 'py', 'python3', 'py3']:
         return ['py', file]
     if language in ['java']:
         subprocess.run(['javac', file], capture_output=True, text=True, check=True)
     if language in ['java', 'class']:
         return ['java', '.'.join(file.split('.')[:-1])]
+    if language in ['cpp', 'c++']:
+        subprocess.run(['g++', file], capture_output=True, text=True, check=True)
+        file = 'a.exe'
+    if language in ['cpp', 'c++', 'app', 'exe', 'executable']:
+        return [file]
 
 verdict = 'Something went wrong'
 for i in os.listdir('.'):
@@ -46,14 +52,18 @@ for i in os.listdir('.'):
                 except subprocess.TimeoutExpired as e:
                     v = 'T'
                     process = e
-                except subprocess.CalledProcessError as e:
+                except (subprocess.CalledProcessError, IndexError) as e:
                     v = 'E'
                     process = e
-                b = [k.strip() for k in (process.stdout or '').splitlines() if k.strip()]
-                with open(f'!LOGS/{j}.out', 'w') as g:
-                    g.write(process.stdout or '')
-                with open(f'!LOGS/{j}.err', 'w') as g:
-                    g.write(process.stderr or '')
+                b = None
+                try:
+                    b = [k.strip() for k in (process.stdout or '').splitlines() if k.strip()]
+                    with open(f'!LOGS/{j}.out', 'w') as g:
+                        g.write(process.stdout or '')
+                    with open(f'!LOGS/{j}.err', 'w') as g:
+                        g.write(process.stderr or '')
+                except AttributeError as e:
+                    pass
                 if a == b:
                     v = 'A'
                 verdict += v
