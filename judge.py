@@ -35,7 +35,7 @@ for i in os.listdir('.'):
         for j in range(10):
             with open(f'{i}/{j}.txt') as f:
                 process = subprocess.run(['python3', f'{i}/main.py'], capture_output=True, text=True, input=f.read())
-                a = [k for k in process.stdout.splitlines() if k]
+                a = [k.strip() for k in process.stdout.splitlines() if k.strip()]
                 with open(f'!LOGS/{j}.txt', 'w') as g:
                     g.write(process.stdout)
                 f.seek(0)
@@ -49,7 +49,7 @@ for i in os.listdir('.'):
                 except subprocess.CalledProcessError as e:
                     v = 'E'
                     process = e
-                b = [k for k in (process.stdout or '').splitlines() if k]
+                b = [k.strip() for k in (process.stdout or '').splitlines() if k.strip()]
                 with open(f'!LOGS/{j}.out', 'w') as g:
                     g.write(process.stdout or '')
                 with open(f'!LOGS/{j}.err', 'w') as g:
