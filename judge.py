@@ -12,7 +12,7 @@ def get_args():
     if language in ['java']:
         subprocess.run(['javac', file], capture_output=True, text=True, check=True)
     if language in ['java', 'class']:
-        return ['java', '.'.join(file.split('.')[:-1])]
+        return ['java', os.path.splitext(os.path.basename(file))[1]]
     if language in ['cpp', 'c++']:
         subprocess.run(['g++', file], capture_output=True, text=True, check=True)
         file = 'a.exe'

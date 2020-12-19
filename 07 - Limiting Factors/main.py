@@ -1,7 +1,7 @@
 import sys
 
 items = sys.stdin.readline() 
-maximum = 100000 #set the minimum impossibly high
+maximum = 10000000 #set the minimum impossibly high
 factors = [] #the list of limiting factors
 
 for i in range(int(items)): #loops over the items
