@@ -1,7 +1,7 @@
 import os, sys, subprocess
 
 file = sys.argv[1] if len(sys.argv) > 1 else input('Filename?')
-extension = file.split('.')[-1] if '.' in file else ''
+extension = file.split('.')[-1].lower() if '.' in file else ''
 language = extension if extension in ['py', 'java', 'class'] else input('Language?').lower()
 problem = input('Problem?')
 
