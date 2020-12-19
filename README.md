@@ -22,7 +22,7 @@ Aliases: python, py, python3, py3
 Extension: .py
 
 ### Java (source code)
-Aliases: java
+Aliases: java  
 Extension: .java
 
 ### Java (compiled)
