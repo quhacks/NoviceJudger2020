@@ -40,7 +40,7 @@ for i in os.listdir('.'):
             break
         for j in range(10):
             with open(f'{i}/{j}.txt') as f:
-                process = subprocess.run(['python3', f'{i}/main.py'], capture_output=True, text=True, input=f.read())
+                process = subprocess.run(['py', f'{i}/main.py'], capture_output=True, text=True, input=f.read())
                 a = [k.strip() for k in process.stdout.splitlines() if k.strip()]
                 with open(f'!LOGS/{j}.txt', 'w') as g:
                     g.write(process.stdout)
