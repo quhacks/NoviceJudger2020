@@ -1,9 +1,9 @@
 import os, sys, subprocess
 
 file = sys.argv[1] if len(sys.argv) > 1 else input('Filename?')
-problem = input('Problem?')
 extension = file.split('.')[-1] if '.' in file else ''
 language = extension if extension in ['py', 'java', 'class'] else input('Language?').lower()
+problem = input('Problem?')
 
 def get_args():
     if language in ['python', 'py', 'python3', 'py3']:
