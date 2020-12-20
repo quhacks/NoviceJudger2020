@@ -30,9 +30,9 @@ Aliases: class
 Extension: .class
 
 ### C++
-Aliases: c++, cpp
+Aliases: c++, cpp  
 Extension: .cpp
 
 ### Executable
-Aliases: executable, exe, app
+Aliases: executable, exe, app  
 Extension: .exe
